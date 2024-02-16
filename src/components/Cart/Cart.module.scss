@@ -55,3 +55,18 @@
 .closeIcon {
   cursor: pointer;
 }
+
+.totalWrapper {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.countPosition {
+  color: $grayMain;
+}
+
+.totalPrice {
+  font-size: 26px;
+}

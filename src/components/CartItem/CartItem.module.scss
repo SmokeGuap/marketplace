@@ -1,0 +1,35 @@
+@import '/src/styles/variables';
+
+.item {
+  display: flex;
+  gap: 8px;
+}
+
+.image {
+  aspect-ratio: 1;
+  width: 60px;
+}
+
+.about {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name {
+  color: $grayMain;
+}
+
+.count {
+  padding: 3px 10px;
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  background-color: $grayLight;
+  border-radius: 5px;
+}
+
+.price {
+  color: $grayMain;
+}

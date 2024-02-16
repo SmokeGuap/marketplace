@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 
 import { CartIcon, CloseIcon } from 'src/assets/icons';
+import { CartItems } from 'src/components';
 
 import styles from './Cart.module.scss';
 
@@ -31,7 +32,12 @@ const Cart: FC = () => {
               </div>
               <CloseIcon onClick={closeCart} className={styles.closeIcon} />
             </div>
-            <p className={styles.empty}>cart is empty :(</p>
+            {/* <p className={styles.empty}>cart is empty :(</p> */}
+            <CartItems />
+            <div className={styles.totalWrapper}>
+              <p className={styles.countPosition}>1 position</p>
+              <p className={styles.totalPrice}>$2795</p>
+            </div>
             <button
               onClick={closeCart}
               type='button'
