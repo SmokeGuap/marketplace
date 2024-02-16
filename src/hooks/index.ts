@@ -1,2 +1,3 @@
-export { default as useWindowWidth } from '../hooks/useWindowWidth';
-export { default as useHorizontalScroll } from '../hooks/useHorizontalScroll';
+export { default as useWindowWidth } from './useWindowWidth';
+export { default as useHorizontalScroll } from './useHorizontalScroll';
+export { default as useScrollBlock } from './useScrollBlock';

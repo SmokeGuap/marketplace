@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 
 import getAllCategories from 'src/API/requests/getAllCategories';
-import { useHorizontalScroll } from 'src/hooks';
+import { useHorizontalScroll, useScrollBlock } from 'src/hooks';
 
 import styles from './Categories.module.scss';
 
@@ -11,6 +11,7 @@ const Categories: FC = () => {
   const [activeCategory, setActiveCategory] = useState('');
 
   const scrollRef = useHorizontalScroll();
+  const [blockScroll, allowScroll] = useScrollBlock();
 
   useEffect(() => {
     getAllCategories().then((data) => setCategories(data));
@@ -19,7 +20,12 @@ const Categories: FC = () => {
   if (!categories) return;
 
   return (
-    <div ref={scrollRef} className={styles.categories}>
+    <div
+      onMouseEnter={() => blockScroll()}
+      onMouseLeave={() => allowScroll()}
+      ref={scrollRef}
+      className={styles.categories}
+    >
       <button
         type='button'
         onClick={() => setActiveCategory('')}
