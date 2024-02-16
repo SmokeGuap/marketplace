@@ -9,3 +9,49 @@
   padding: 6px 8px 6px 6px;
   border-radius: 5px;
 }
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $grayLight;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  width: 320px;
+  min-height: 430px;
+  height: 100%;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.backButton {
+  width: 100%;
+  color: $white;
+  background-color: $blue;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.closeIcon {
+  cursor: pointer;
+}
