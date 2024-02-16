@@ -12,8 +12,20 @@ a {
 }
 
 button {
+  cursor: pointer;
   background: none;
   border: none;
+}
+
+input {
+  font-size: 16px;
+  border: none;
+  font-family: 'Inter';
+  color: $grayMain;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 body {

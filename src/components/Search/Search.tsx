@@ -1,12 +1,35 @@
-import { SearchIcon } from 'src/assets/icons';
+import { FC } from 'react';
+
+import { CloseIcon, SearchIcon } from 'src/assets/icons';
 
 import styles from './Search.module.scss';
+import { ISearchProps } from './Search.types';
 
-const Search = () => {
+const Search: FC<ISearchProps> = (props) => {
+  const { isOpen, setIsOpen } = props;
+
+  const openSearch = () => {
+    setIsOpen(true);
+  };
+
+  const closeSearch = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className={styles.search}>
-      <SearchIcon />
-    </div>
+    <>
+      {isOpen ? (
+        <div className={styles.search}>
+          <SearchIcon />
+          <input placeholder='Search...' />
+          <CloseIcon onClick={closeSearch} className={styles.close} />
+        </div>
+      ) : (
+        <button onClick={openSearch} type='button' className={styles.button}>
+          <SearchIcon />
+        </button>
+      )}
+    </>
   );
 };
 

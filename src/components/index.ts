@@ -3,3 +3,4 @@ export { default as Categories } from './Categories';
 export { default as Cart } from './Cart';
 export { default as Product } from './Product';
 export { default as Products } from './Products';
+export { default as Header } from './Header';

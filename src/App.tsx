@@ -1,15 +1,11 @@
-import { Search, Categories, Cart, Products } from './components';
+import { Products, Header } from 'src/components';
 
 import styles from './App.module.scss';
 
 const App = () => {
   return (
     <div className={styles.page}>
-      <div className={styles.header}>
-        <Search />
-        <Categories />
-        <Cart />
-      </div>
+      <Header />
       <Products />
     </div>
   );

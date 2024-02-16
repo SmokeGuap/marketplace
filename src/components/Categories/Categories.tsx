@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 import { useHorizontalScroll } from 'src/hooks';
 
 import styles from './Categories.module.scss';
 
-const Categories = () => {
+const Categories: FC = () => {
   const scrollRef = useHorizontalScroll();
   
   return (

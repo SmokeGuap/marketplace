@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 import { CartIcon, LoaderIcon } from 'src/assets/icons';
 
 import styles from './Product.module.scss';
 
-const Product = () => {
+const Product: FC = () => {
   return (
     <div className={styles.product}>
       <p className={styles.sale}>
