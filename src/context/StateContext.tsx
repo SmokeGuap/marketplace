@@ -1,18 +1,11 @@
-import {
-  Dispatch,
-  FC,
-  ReactNode,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { createContext } from 'react';
 import { TProduct } from 'src/components/Product/Product.types';
 
 type TCartProduct = TProduct & { count: number };
 
 interface IStateContext {
-  cart: TCartProduct[];
+  cart: TCartProduct[] | null;
   addProduct: (product: TProduct) => void;
   removeProduct: (product: TProduct) => void;
 }
@@ -28,7 +21,9 @@ const StateContext = createContext<IStateContext>({
 });
 
 const StateProvider: FC<IStateProviderProps> = ({ children }) => {
-  const [cart, setCart] = useState<any>([]);
+  const [cart, setCart] = useState<any>(
+    JSON.parse(localStorage.getItem('cart') || '[]')
+  );
 
   const addProduct = (product: TProduct) => {
     const findProduct = cart.find(
@@ -60,6 +55,7 @@ const StateProvider: FC<IStateProviderProps> = ({ children }) => {
 
   useEffect(() => {
     setCart([...cart.filter((item: TCartProduct) => item.count !== 0)]);
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [
     cart.reduce((totalCount: number, current: TCartProduct) => {
       return totalCount + current.count;
