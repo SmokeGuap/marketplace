@@ -1,4 +1,4 @@
-import { Search, Categories, Cart } from './components';
+import { Search, Categories, Cart, Products } from './components';
 
 import styles from './App.module.scss';
 
@@ -10,6 +10,7 @@ const App = () => {
         <Categories />
         <Cart />
       </div>
+      <Products />
     </div>
   );
 };
