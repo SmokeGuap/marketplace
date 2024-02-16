@@ -9,6 +9,7 @@
 }
 
 .search {
+  position: relative;
   width: 100%;
   display: flex;
   gap: 8px;
@@ -24,4 +25,13 @@
 
 .close {
   cursor: pointer;
+}
+
+.clear {
+  background-color: $blue;
+  padding: 6px 8px 6px 6px;
+  border-radius: 5px;
+  position: absolute;
+  right: 25px;
+  color: $white;
 }

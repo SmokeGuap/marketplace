@@ -3,30 +3,42 @@ import { FC } from 'react';
 import { CartIcon, LoaderIcon } from 'src/assets/icons';
 
 import styles from './Product.module.scss';
+import { IProductProps } from './Product.types';
+import { countOldPrice, readMore } from 'src/utils';
 
-const Product: FC = () => {
+const Product: FC<IProductProps> = (props) => {
+  const { product } = props;
+
+  const longDescription = product.description.length > 75;
+
   return (
     <div className={styles.product}>
       <p className={styles.sale}>
-        <span>12.96%</span>
+        <span>{product.discountPercentage}%</span>
         <span>off sale</span>
       </p>
-      <img className={styles.image} />
+      <img
+        src={product.images[0]}
+        alt={product.title}
+        className={styles.image}
+      />
       <div className={styles.rating}>
         <LoaderIcon />
-        <p>4.69</p>
+        <p>{product.rating}</p>
       </div>
-      <p className={styles.name}>Apple iPhone 9</p>
+      <p className={styles.name}>{product.title}</p>
       <p className={styles.description}>
-        An apple mobile which is nothing like apple An apple
+        {readMore(product.description)}
+        {longDescription && <span className={styles.readMore}>Read more</span>}
       </p>
+
       <div className={styles.priceWrapper}>
         <div className={styles.newPrice}>
           <CartIcon />
-          <p>$549</p>
+          <p>${product.price}</p>
         </div>
         <p className={styles.oldPrice}>
-          <s>$685</s>
+          <s>${countOldPrice(product.price, product.discountPercentage)}</s>
         </p>
       </div>
     </div>

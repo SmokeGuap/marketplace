@@ -1,6 +1,8 @@
 @import '/src/styles/variables';
 
 .product {
+  display: flex;
+  flex-direction: column;
   padding: 16px;
   border: 1px solid white;
 }
@@ -20,6 +22,7 @@
 }
 
 .image {
+  object-fit: contain;
   width: 100%;
   aspect-ratio: 1;
 }
@@ -43,6 +46,7 @@
 }
 
 .description {
+  flex: 1;
   margin-bottom: 8px;
   color: $grayMain;
 }
@@ -66,4 +70,8 @@
 
 .oldPrice {
   color: $grayMain;
+}
+
+.readMore {
+  color: $blue;
 }
