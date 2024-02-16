@@ -1,0 +1,11 @@
+@import '/src/styles/variables';
+
+.cart {
+  color: $blue;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: $white;
+  padding: 6px 8px 6px 6px;
+  border-radius: 5px;
+}
