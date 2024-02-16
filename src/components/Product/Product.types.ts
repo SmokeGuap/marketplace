@@ -14,4 +14,5 @@ export type TProduct = {
   category: string;
   thumbnail: string;
   images: string[];
+  count: number;
 };

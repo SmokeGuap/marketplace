@@ -28,6 +28,11 @@
   width: max-content;
   background-color: $grayLight;
   border-radius: 5px;
+
+  span {
+    width: 30px;
+    text-align: center;
+  }
 }
 
 .price {

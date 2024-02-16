@@ -1,18 +1,26 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 
 import { CartIcon, CloseIcon } from 'src/assets/icons';
 import { CartItems } from 'src/components';
+import { StateContext } from 'src/context';
+import { useScrollBlock } from 'src/hooks';
 
 import styles from './Cart.module.scss';
 
 const Cart: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { cart } = useContext(StateContext);
+
+  const [blockScroll, allowScroll] = useScrollBlock();
+
   const openCart = () => {
+    blockScroll();
     setIsOpen(true);
   };
 
   const closeCart = () => {
+    allowScroll();
     setIsOpen(false);
   };
 
@@ -32,12 +40,24 @@ const Cart: FC = () => {
               </div>
               <CloseIcon onClick={closeCart} className={styles.closeIcon} />
             </div>
-            {/* <p className={styles.empty}>cart is empty :(</p> */}
-            <CartItems />
-            <div className={styles.totalWrapper}>
-              <p className={styles.countPosition}>1 position</p>
-              <p className={styles.totalPrice}>$2795</p>
-            </div>
+            {cart.length === 0 ? (
+              <p className={styles.empty}>cart is empty :(</p>
+            ) : (
+              <CartItems />
+            )}
+            {cart.length > 0 && (
+              <div className={styles.totalWrapper}>
+                <p className={styles.countPosition}>{`${cart.length} ${
+                  cart.length > 1 ? 'positions' : 'position'
+                }`}</p>
+                <p className={styles.totalPrice}>
+                  $
+                  {cart.reduce((totalCount: number, current) => {
+                    return totalCount + current.count * current.price;
+                  }, 0)}
+                </p>
+              </div>
+            )}
             <button
               onClick={closeCart}
               type='button'

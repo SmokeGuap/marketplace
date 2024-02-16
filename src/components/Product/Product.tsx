@@ -1,13 +1,16 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 
 import { CartIcon, LoaderIcon } from 'src/assets/icons';
+import { StateContext } from 'src/context';
+import { countOldPrice, readMore } from 'src/utils';
 
 import styles from './Product.module.scss';
 import { IProductProps } from './Product.types';
-import { countOldPrice, readMore } from 'src/utils';
 
 const Product: FC<IProductProps> = (props) => {
   const { product } = props;
+
+  const { cart, addProduct } = useContext(StateContext);
 
   const longDescription = product.description.length > 75;
 
@@ -29,14 +32,22 @@ const Product: FC<IProductProps> = (props) => {
       <p className={styles.name}>{product.title}</p>
       <p className={styles.description}>
         {readMore(product.description)}
-        {longDescription && <span className={styles.readMore}>Read more</span>}
+        {longDescription && (
+          <button type='button' className={styles.readMore}>
+            Read more
+          </button>
+        )}
       </p>
 
       <div className={styles.priceWrapper}>
-        <div className={styles.newPrice}>
+        <button
+          onClick={() => addProduct(product)}
+          type='button'
+          className={styles.newPrice}
+        >
           <CartIcon />
           <p>${product.price}</p>
-        </div>
+        </button>
         <p className={styles.oldPrice}>
           <s>${countOldPrice(product.price, product.discountPercentage)}</s>
         </p>

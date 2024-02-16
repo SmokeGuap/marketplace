@@ -1,11 +1,20 @@
+import { FC, useContext } from 'react';
+
 import { CartItem } from 'src/components';
+import { StateContext } from 'src/context';
 
 import styles from './CartItems.module.scss';
 
-const CartItems = () => {
+const CartItems: FC = () => {
+  const { cart } = useContext(StateContext);
+
   return (
     <div className={styles.items}>
-      <CartItem />
+      {cart
+        .sort((a, b) => a.id - b.id)
+        .map((item) => (
+          <CartItem key={item.id} item={item} />
+        ))}
     </div>
   );
 };

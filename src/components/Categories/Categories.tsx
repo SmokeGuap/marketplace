@@ -21,8 +21,8 @@ const Categories: FC = () => {
 
   return (
     <div
-      onMouseEnter={() => blockScroll()}
-      onMouseLeave={() => allowScroll()}
+      onMouseEnter={blockScroll}
+      onMouseLeave={allowScroll}
       ref={scrollRef}
       className={styles.categories}
     >
