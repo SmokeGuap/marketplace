@@ -6,14 +6,7 @@ const App = () => {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <div className={styles.search}>
-          <SearchIcon />
-        </div>
-        <div className={styles.categories}></div>
-        <div className={styles.cart}>
-          <CartIcon />
-          <p>cart</p>
-        </div>
+        <Categories />
       </div>
     </div>
   );
