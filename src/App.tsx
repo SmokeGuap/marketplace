@@ -1,14 +1,9 @@
-import { Products, Header } from 'src/components';
+import { RouterProvider } from 'react-router-dom';
 
-import styles from './App.module.scss';
+import router from './router';
 
 const App = () => {
-  return (
-    <div className={styles.page}>
-      <Header />
-      <Products />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
