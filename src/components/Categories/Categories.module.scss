@@ -7,14 +7,15 @@
   border-radius: 5px;
   color: $grayMain;
   overflow: auto;
-
+  scrollbar-width: none;
+  
   &::-webkit-scrollbar {
     height: 0px;
   }
 }
 
 .category {
-  text-wrap: nowrap;
+  white-space: pre;
   display: flex;
   align-items: center;
   background-color: $white;
