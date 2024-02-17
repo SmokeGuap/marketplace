@@ -1,10 +1,19 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import { createContext } from 'react';
 import { TProduct } from 'src/components/Product/Product.types';
 
 type TCartProduct = TProduct & { count: number };
 
 interface IStateContext {
+  debouncedSearch: string;
+  setDebouncedSearch: Dispatch<SetStateAction<string>>;
   cart: TCartProduct[] | null;
   addProduct: (product: TProduct) => void;
   removeProduct: (product: TProduct) => void;
@@ -15,12 +24,15 @@ interface IStateProviderProps extends React.DOMAttributes<HTMLDivElement> {
 }
 
 const StateContext = createContext<IStateContext>({
+  debouncedSearch: '',
   cart: [],
+  setDebouncedSearch: () => {},
   addProduct: () => {},
   removeProduct: () => {},
 });
 
 const StateProvider: FC<IStateProviderProps> = ({ children }) => {
+  const [debouncedSearch, setDebouncedSearch] = useState<string>('');
   const [cart, setCart] = useState<any>(
     JSON.parse(localStorage.getItem('cart') || '[]')
   );
@@ -63,7 +75,15 @@ const StateProvider: FC<IStateProviderProps> = ({ children }) => {
   ]);
 
   return (
-    <StateContext.Provider value={{ cart, addProduct, removeProduct }}>
+    <StateContext.Provider
+      value={{
+        cart,
+        addProduct,
+        removeProduct,
+        debouncedSearch,
+        setDebouncedSearch,
+      }}
+    >
       {children}
     </StateContext.Provider>
   );

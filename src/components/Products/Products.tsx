@@ -1,13 +1,17 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { getAllProducts, getAllProductsByCategory } from 'src/API/requests';
 import { Product, Pagination } from 'src/components';
+import { StateContext } from 'src/context';
 
 import styles from './Products.module.scss';
 import { TProducts } from './Products.types';
+import getAllProductsBySearch from 'src/API/requests/getAllProductsBySearch';
 
 const Products: FC = () => {
+  const { debouncedSearch } = useContext(StateContext);
+
   const [products, setProducts] = useState<TProducts>();
   const [totalCount, setTotalCount] = useState<number>();
 
@@ -25,12 +29,19 @@ const Products: FC = () => {
   );
 
   useEffect(() => {
-    if (!category)
+    if (category) return;
+    if (debouncedSearch.length < 4) {
       getAllProducts(skip).then((data) => {
         setProducts(data.products);
         setTotalCount(data.total);
       });
-  }, [skip, category]);
+    } else {
+      getAllProductsBySearch(debouncedSearch).then((data) => {
+        setProducts(data.products);
+        setTotalCount(data.total);
+      });
+    }
+  }, [skip, category, debouncedSearch]);
 
   useEffect(() => {
     if (category)
@@ -45,21 +56,30 @@ const Products: FC = () => {
     if (!category) setSearchParams({ ['skip']: String(currentPage * 10 - 10) });
   }, [currentPage]);
 
-  if (!products || !totalCount) return;
+  if (!products) return;
+  console.log(totalCount);
 
   return (
     <>
-      <div className={styles.products}>
-        {products.map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
-      </div>
-      <Pagination
-        totalCount={totalCount}
-        currentPage={currentPage}
-        pageSize={10}
-        setCurrentPage={setCurrentPage}
-      />
+      {totalCount ? (
+        <>
+          <div className={styles.products}>
+            {products.map((product) => (
+              <Product key={product.id} product={product} />
+            ))}
+          </div>
+          <Pagination
+            totalCount={totalCount}
+            currentPage={currentPage}
+            pageSize={10}
+            setCurrentPage={setCurrentPage}
+          />
+        </>
+      ) : (
+        <p className={styles.none}>
+          Ничего не найдено, попробуйте изменить запрос.
+        </p>
+      )}
     </>
   );
 };

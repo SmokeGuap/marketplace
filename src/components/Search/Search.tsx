@@ -1,6 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 
 import { CloseIcon, SearchIcon } from 'src/assets/icons';
+import { StateContext } from 'src/context';
+import { useDebounce } from 'src/hooks';
 
 import styles from './Search.module.scss';
 import { ISearchProps } from './Search.types';
@@ -8,8 +10,15 @@ import { ISearchProps } from './Search.types';
 const Search: FC<ISearchProps> = (props) => {
   const { isOpen, setIsOpen } = props;
 
+  const { setDebouncedSearch } = useContext(StateContext);
   const [focus, setFocus] = useState(false);
   const [search, setSearch] = useState('');
+
+  const debouncedSearch = useDebounce(search, 500);
+
+  useEffect(() => {
+    setDebouncedSearch(debouncedSearch);
+  }, [debouncedSearch]);
 
   const InFocus = () => {
     setFocus(true);
