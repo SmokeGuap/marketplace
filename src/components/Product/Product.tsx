@@ -1,4 +1,7 @@
 import { FC, useContext, useEffect, useState } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import { CartIcon, LoaderIcon } from 'src/assets/icons';
 import { StateContext } from 'src/context';
@@ -26,17 +29,31 @@ const Product: FC<IProductProps> = (props) => {
     }
   }, [cart]);
 
+  const settings = {
+    arrows: false,
+    infinite: false,
+    dots: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <div className={styles.product}>
       <p className={styles.sale}>
         <span>{product.discountPercentage}%</span>
         <span>off sale</span>
       </p>
-      <img
-        src={product.images[0]}
-        alt={product.title}
-        className={styles.image}
-      />
+      <Slider className={styles.slider} {...settings}>
+        {product.images.map((image, id) => (
+          <img
+            key={id}
+            src={image}
+            alt={product.title}
+            className={styles.image}
+          />
+        ))}
+      </Slider>
       <div className={styles.rating}>
         <LoaderIcon />
         <p>{product.rating}</p>

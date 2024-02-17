@@ -21,6 +21,11 @@
   }
 }
 
+.slider {
+  margin: 0 auto;
+  width: 22vw;
+}
+
 .image {
   object-fit: contain;
   width: 100%;
@@ -74,4 +79,22 @@
 
 .readMore {
   color: $blue;
+}
+
+@media (max-width: 1500px) {
+  .slider {
+    width: 29vw;
+  }
+}
+
+@media (max-width: 1100px) {
+  .slider {
+    width: 44vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider {
+    width: 93vw;
+  }
 }
