@@ -4,7 +4,7 @@ import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'/marketplace/'
+  base: '/marketplace/',
   plugins: [react(), svgr()],
   resolve: {
     alias: {
