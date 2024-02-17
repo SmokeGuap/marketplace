@@ -57,7 +57,6 @@ const Products: FC = () => {
   }, [currentPage]);
 
   if (!products) return;
-  console.log(totalCount);
 
   return (
     <>

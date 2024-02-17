@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 
 import { CartIcon, CloseIcon } from 'src/assets/icons';
 import { CartItems } from 'src/components';
@@ -23,6 +23,7 @@ const Cart: FC = () => {
     allowScroll();
     setIsOpen(false);
   };
+  if (cart === null) return;
 
   return (
     <>

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useContext, useEffect, useState } from 'react';
 
 import { CloseIcon, SearchIcon } from 'src/assets/icons';
@@ -42,32 +43,30 @@ const Search: FC<ISearchProps> = (props) => {
 
   return (
     <>
-      {isOpen ? (
-        <div className={styles.search}>
-          <SearchIcon />
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onFocus={InFocus}
-            onBlur={OutFocus}
-            placeholder='Search...'
-          />
-          {focus && search.length > 0 && (
-            <button
-              type='button'
-              onMouseDown={clearSearch}
-              className={styles.clear}
-            >
-              clear text
-            </button>
-          )}
-          <CloseIcon onClick={closeSearch} className={styles.close} />
-        </div>
-      ) : (
+      <div
+        className={classNames(styles.search, { [styles.activeSearch]: isOpen })}
+      >
         <button onClick={openSearch} type='button' className={styles.button}>
           <SearchIcon />
         </button>
-      )}
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onFocus={InFocus}
+          onBlur={OutFocus}
+          placeholder='Search...'
+        />
+        {focus && search.length > 0 && (
+          <button
+            type='button'
+            onMouseDown={clearSearch}
+            className={styles.clear}
+          >
+            clear text
+          </button>
+        )}
+        <CloseIcon onClick={closeSearch} className={styles.close} />
+      </div>
     </>
   );
 };

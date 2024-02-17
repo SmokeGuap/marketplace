@@ -29,6 +29,16 @@
   min-height: 430px;
   height: 100%;
   padding: 20px;
+  animation: slideOpen 0.5s ease-in-out;
+}
+
+@keyframes slideOpen {
+  from {
+    transform: translateX(360px);
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
 
 .header {
