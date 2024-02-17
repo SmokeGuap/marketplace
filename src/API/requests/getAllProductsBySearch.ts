@@ -1,11 +1,18 @@
 import BASE_URI from 'src/API/BASE_URI';
 
 const getAllProductsBySearch = async (search: string) => {
-  const res = await fetch(`${BASE_URI}products/search?q=${search}`);
+  try {
+    const res = await fetch(`${BASE_URI}products/search?q=${search}`);
 
-  const data = await res.json();
+    if (!res.ok) {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
 
-  return data;
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default getAllProductsBySearch;

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { FC, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { getAllCategories } from 'src/API/requests/';
 import { useHorizontalScroll, useScrollBlock } from 'src/hooks';
@@ -9,12 +9,21 @@ import styles from './Categories.module.scss';
 
 const Categories: FC = () => {
   const [categories, setCategories] = useState<string[]>();
-  const [activeCategory, setActiveCategory] = useState('');
 
   const [_, setSearchParams] = useSearchParams();
 
   const scrollRef = useHorizontalScroll();
   const [blockScroll, allowScroll] = useScrollBlock();
+
+  const { search } = useLocation();
+  const searchArray = search.split('&');
+  const category = searchArray
+    .find((item) => item.includes('category'))
+    ?.split('=')[1];
+
+  const [activeCategory, setActiveCategory] = useState(
+    category ? category : ''
+  );
 
   useEffect(() => {
     getAllCategories().then((data) => setCategories(data));

@@ -1,11 +1,18 @@
 import BASE_URI from 'src/API/BASE_URI';
 
 const getAllProductsByCategory = async (category: string) => {
-  const res = await fetch(`${BASE_URI}products/category/${category}`);
+  try {
+    const res = await fetch(`${BASE_URI}products/category/${category}`);
 
-  const data = await res.json();
+    if (!res.ok) {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
 
-  return data;
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export default getAllProductsByCategory;
