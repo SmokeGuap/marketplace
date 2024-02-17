@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import { FC, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import getAllCategories from 'src/API/requests/getAllCategories';
+import { getAllCategories } from 'src/API/requests/';
 import { useHorizontalScroll, useScrollBlock } from 'src/hooks';
 
 import styles from './Categories.module.scss';
@@ -10,12 +11,22 @@ const Categories: FC = () => {
   const [categories, setCategories] = useState<string[]>();
   const [activeCategory, setActiveCategory] = useState('');
 
+  const [_, setSearchParams] = useSearchParams();
+
   const scrollRef = useHorizontalScroll();
   const [blockScroll, allowScroll] = useScrollBlock();
 
   useEffect(() => {
     getAllCategories().then((data) => setCategories(data));
   }, []);
+
+  useEffect(() => {
+    if (activeCategory) {
+      setSearchParams({ ['category']: activeCategory });
+    } else {
+      setSearchParams({});
+    }
+  }, [activeCategory]);
 
   if (!categories) return;
 
@@ -39,7 +50,9 @@ const Categories: FC = () => {
         <button
           type='button'
           key={id}
-          onClick={() => setActiveCategory(category)}
+          onClick={() =>
+            setActiveCategory(activeCategory === category ? '' : category)
+          }
           className={classnames(styles.category, {
             [styles.activeCategory]: activeCategory === category,
           })}

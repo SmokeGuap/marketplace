@@ -33,7 +33,7 @@ export const usePagination = ({
     );
 
     const shouldShowLeftDots = leftSiblingIndex > 1;
-    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 1;
+    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 0;
 
     const firstPageIndex = 1;
     const lastPageIndex = totalPageCount;

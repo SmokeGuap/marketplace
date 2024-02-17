@@ -10,6 +10,7 @@ import { MainPage } from 'src/page';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path='/' element={<MainPage />} />
       <Route path='/:slug' element={<MainPage />} />
       <Route path='*' element={<Navigate to='/' replace />} />
     </>
