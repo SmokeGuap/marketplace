@@ -8,6 +8,8 @@ import styles from './CartItems.module.scss';
 const CartItems: FC = () => {
   const { cart } = useContext(StateContext);
 
+  if (!cart) return;
+
   return (
     <div className={styles.items}>
       {cart

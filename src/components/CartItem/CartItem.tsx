@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext } from 'react';
 
 import { TProduct } from '../Product/Product.types';
 
@@ -8,7 +8,7 @@ import { StateContext } from 'src/context';
 const CartItem: FC<{ item: TProduct }> = (props) => {
   const { item } = props;
 
-  const { cart, addProduct, removeProduct } = useContext(StateContext);
+  const { addProduct, removeProduct } = useContext(StateContext);
 
   const addCount = () => {
     removeProduct(item);

@@ -10,7 +10,7 @@ import { IProductProps } from './Product.types';
 const Product: FC<IProductProps> = (props) => {
   const { product } = props;
 
-  const { cart, addProduct } = useContext(StateContext);
+  const { addProduct } = useContext(StateContext);
 
   const longDescription = product.description.length > 75;
 
