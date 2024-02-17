@@ -1,6 +1,7 @@
 @import '/src/styles/variables';
 
 .cart {
+  position: relative;
   color: $blue;
   display: flex;
   align-items: center;
@@ -8,6 +9,19 @@
   background-color: $white;
   padding: 6px 8px 6px 6px;
   border-radius: 5px;
+}
+
+.cartCount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  color: $white;
+  background-color: $blue;
+  font-size: 10px;
+  width: 16px;
+  line-height: 16px;
+  border-radius: 50%;
+  text-align: center;
 }
 
 .modal {

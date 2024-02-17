@@ -30,6 +30,7 @@ const Cart: FC = () => {
       <button onClick={openCart} type='button' className={styles.cart}>
         <CartIcon />
         <p>cart</p>
+        {cart.length > 0 && <p className={styles.cartCount}>{cart.length}</p>}
       </button>
       {isOpen && (
         <div onClick={closeCart} className={styles.modal}>
