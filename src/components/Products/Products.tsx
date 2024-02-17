@@ -54,6 +54,7 @@ const Products: FC = () => {
 
   useEffect(() => {
     if (!category) setSearchParams({ ['skip']: String(currentPage * 10 - 10) });
+    document.querySelector('html')?.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
   if (!products) return;
