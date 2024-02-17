@@ -16,7 +16,7 @@ const useHorizontalScroll = () => {
       elRef.current.addEventListener('wheel', onWheel);
       return () => elRef.current?.removeEventListener('wheel', onWheel);
     }
-  }, []);
+  });
 
   return elRef;
 };
