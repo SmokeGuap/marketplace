@@ -17,8 +17,12 @@ const Product: FC<IProductProps> = (props) => {
 
   useEffect(() => {
     if (!cart) return;
-    if (cart.find((item) => item.id === product.id)) {
-      setInCart(true);
+
+    const item = cart.find((item) => item.id === product.id);
+
+    if (item) {
+      if (item.count > 0) setInCart(true);
+      else setInCart(false);
     }
   }, [cart]);
 
