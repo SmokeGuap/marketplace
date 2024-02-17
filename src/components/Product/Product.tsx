@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 
 import { CartIcon, LoaderIcon } from 'src/assets/icons';
 import { StateContext } from 'src/context';
@@ -10,9 +10,17 @@ import { IProductProps } from './Product.types';
 const Product: FC<IProductProps> = (props) => {
   const { product } = props;
 
-  const { addProduct } = useContext(StateContext);
+  const [inCart, setInCart] = useState(false);
+  const { cart, addProduct } = useContext(StateContext);
 
   const longDescription = product.description.length > 75;
+
+  useEffect(() => {
+    if (!cart) return;
+    if (cart.find((item) => item.id === product.id)) {
+      setInCart(true);
+    }
+  }, [cart]);
 
   return (
     <div className={styles.product}>
@@ -45,8 +53,14 @@ const Product: FC<IProductProps> = (props) => {
           type='button'
           className={styles.newPrice}
         >
-          <CartIcon />
-          <p>${product.price}</p>
+          {inCart ? (
+            <p>ADD MORE</p>
+          ) : (
+            <>
+              <CartIcon />
+              <p>${product.price}</p>
+            </>
+          )}
         </button>
         <p className={styles.oldPrice}>
           <s>${countOldPrice(product.price, product.discountPercentage)}</s>
